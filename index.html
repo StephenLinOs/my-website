@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://astonishing-cactus-3c4288.netlify.app/ -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canada Go! 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+    html, body { margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: #fcfbf6; background-image: radial-gradient(#e5dfb8 2px, transparent 2px); background-size: 24px 24px; font-family: "Poppins", "M PLUS Rounded 1c", sans-serif; color: #5c5346; }
+    .hidden { display: none !important; }
+    .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; background: rgba(252, 251, 246, 0.6); padding: 15px; padding-bottom: 90px; box-sizing: border-box; }
+    header { display: flex; justify-content: center; margin-bottom: 15px; }
+    .title { color: #e59e35; margin: 0; font-size: 26px; text-shadow: 1px 1px 0px #fff; font-family: "Poppins", sans-serif; font-weight: 700; }
+    .subtitle { margin: 4px 0 0 0; font-size: 13px; font-weight: bold; color: #8a8174; background: white; padding: 4px 12px; border-radius: 20px; border: 1px solid #f0ead2; display: inline-block; font-family: "M PLUS Rounded 1c", sans-serif;}
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 2px solid #f0ead2; display: flex; justify-content: space-around; align-items: center; padding: 10px 5px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 10px rgba(224, 216, 176, 0.2); z-index: 100; max-width: 500px; margin: 0 auto; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; color: #c4bcae; font-size: 11px; cursor: pointer; transition: 0.2s; width: 20%; }
+    .nav-item .icon { font-size: 22px; margin-bottom: 2px; filter: grayscale(100%) opacity(0.5); }
+    .nav-item.active { color: #e59e35; font-weight: bold; transform: translateY(-3px); }
+    .nav-item.active .icon { filter: none; }
+    .sub-nav { display: flex; gap: 10px; margin-bottom: 15px; }
+    .sub-btn { flex: 1; background: white; border: 2px solid #f0ead2; border-radius: 12px; padding: 8px; font-size: 14px; font-weight: bold; color: #8a8174; box-shadow: 2px 2px 0px #e0d8b0; cursor: pointer; }
+    .sub-btn.active { background: #8FC0A9; border-color: #8FC0A9; color: white; }
+    .weather-card { background: rgba(255,255,255,0.8); border: 1px dashed #d5cda3; border-radius: 12px; padding: 10px 12px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+    .weather-icon { font-size: 24px; }
+    .date-tabs { display: flex; gap: 10px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 10px; scroll-behavior: smooth; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .tab { background: white; border: 2px solid #f0ead2; border-radius: 16px; padding: 6px 12px; display: flex; flex-direction: column; align-items: center; box-shadow: 3px 3px 0px #e0d8b0; min-width: 40px; cursor:pointer; }
+    .tab.active { background: #eaaa62; border-color: #eaaa62; color: white; transform: scale(1.05); }
+    .day-text { font-size: 12px; font-weight: 600; font-family: "Poppins", sans-serif; }
+    .day-num { font-size: 18px; font-weight: 700; font-family: "Poppins", sans-serif; }
+    .schedule-card { background: white; border-radius: 16px; padding: 15px; display: flex; gap: 12px; margin-top: 15px; box-shadow: 4px 4px 0px #e0d8b0; }
+    .time-badge { background: #eaaa62; color: white; font-weight: 600; font-family: "Poppins", sans-serif; padding: 4px 10px; border-radius: 10px; font-size: 13px; white-space: nowrap; height: fit-content;}
+    .bg-green { background: #8FC0A9; } .bg-blue { background: #7ab3d6; } .bg-red { background: #e07a5f; }
+    .info { flex: 1; }
+    .info h3 { margin: 0 0 4px 0; font-size: 15px; font-weight: 700; }
+    .info p { margin: 0; font-size: 13px; color: #8a8174; line-height: 1.5; }
+    .map-link { display: inline-block; background: #e8f0fe; color: #1967d2; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; text-decoration: none; margin-top: 8px; margin-right: 6px; }
+    .map-link.block { display: block; width: fit-content; }
+    .expense-card { background: white; border-radius: 16px; padding: 18px; box-shadow: 4px 4px 0px #e0d8b0; }
+    .form-row { display: flex; gap: 10px; }
+    .half { flex: 1; }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 13px; font-weight: bold; color: #6a6256; margin-bottom: 4px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 2px solid #f0ead2; border-radius: 8px; box-sizing: border-box; font-size: 16px; font-family:inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #eaaa62; }
+    .checkbox-group { display: flex; gap: 10px; }
+    .submit-btn { width: 100%; background: #eaaa62; color: white; border: none; padding: 12px; border-radius: 12px; font-size: 16px; font-weight: bold; margin-top: 10px; box-shadow: 2px 2px 0px #d5964d; cursor: pointer;}
+    .check-item { display: block; margin-bottom: 12px; font-size: 14px; color: #5c5346; }
+    .check-item input { margin-right: 8px; transform: scale(1.2); accent-color: #8FC0A9; }
+    .check-item a { color: #1967d2; font-weight: bold; text-decoration: none; margin-left: 5px; background: #e8f0fe; padding: 2px 6px; border-radius: 4px; font-size: 11px;}
+    .note-content h3 { font-size: 16px; color: #8FC0A9; margin-top: 20px; margin-bottom: 8px; border-bottom: 2px solid #f0ead2; padding-bottom: 4px;}
+    .note-content p { font-size: 14px; color: #6a6256; line-height: 1.6; margin-bottom: 8px;}
+    .note-content ul { padding-left: 20px; margin: 0; color: #6a6256; font-size: 14px; line-height: 1.6; }
+    .note-content li { margin-bottom: 4px; }
+    .ticket-item { border-bottom: 1px dashed #e0d8b0; padding-bottom: 15px; margin-bottom: 15px; }
+    .ticket-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .ticket-item h3 { font-size: 15px; margin: 0 0 6px 0; color: #5c5346; }
+    .ticket-item p { font-size: 13px; color: #8a8174; margin: 0 0 8px 0; line-height: 1.5; }
+    .ticket-item .tag { display: inline-block; background: #fdfce5; border: 1px solid #eaaa62; color: #eaaa62; font-size: 12px; font-weight: bold; padding: 2px 8px; border-radius: 6px; }
+
+    .filter-group { display: flex; gap: 8px; margin-bottom: 15px; }
+    .filter-btn { flex: 1; padding: 6px; background: white; border: 2px solid #f0ead2; color: #8a8174; border-radius: 20px; font-size: 14px; font-weight: bold; cursor: pointer; }
+    .filter-btn.active { background: #eaaa62; border-color: #eaaa62; color: white; }
+    .summary-box { background: #8FC0A9; color: white; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; box-shadow: 3px 3px 0px #7ab3d6;}
+    .summary-title { font-size: 13px; font-weight: bold; }
+    .summary-total { font-size: 28px; font-weight: bold; margin: 5px 0; font-family: "Poppins", sans-serif; text-shadow: 1px 1px 0px #5c8f7a; }
+    .summary-detail { font-size: 12px; opacity: 0.9; }
+    .daily-group { margin-bottom: 15px; }
+    .daily-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: bold; color: #5c5346; border-bottom: 2px dashed #f0ead2; padding-bottom: 6px; margin-bottom: 10px; }
+    .expense-item { background: #fdfce5; border-radius: 10px; padding: 10px; margin-bottom: 8px; border-left: 4px solid #eaaa62; }
+    .ex-item-main { display: flex; justify-content: space-between; font-weight: bold; font-size: 14px; margin-bottom: 4px; }
+    .ex-item-sub { display: flex; justify-content: space-between; font-size: 12px; color: #8a8174; }
+
+    .journal-header-area { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 5px;}
+    .write-btn { background: #6b9e7d; color: white; border: 2px solid white; box-shadow: 0 0 0 2px #6b9e7d; border-radius: 24px; padding: 8px 18px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .write-btn:active { transform: scale(0.95); }
+    .journal-date-divider { display: flex; align-items: center; gap: 12px; margin: 25px 0 15px 0; }
+    .journal-date-pill { background: #e0f2f1; color: #3b8a7c; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: bold; border: 2px solid #bce3d6; font-family: "Poppins", sans-serif;}
+    .journal-date-line { flex: 1; border-bottom: 2px solid #e0dcd3; }
+    .journal-post { background: white; border-radius: 24px; padding: 20px; margin-bottom: 18px; box-shadow: 0 6px 15px rgba(0,0,0,0.03), 0 4px 0px #f0ebd9; }
+    .j-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .j-author-info { display: flex; align-items: center; gap: 10px; }
+    .j-avatar { width: 38px; height: 38px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 16px; font-family: "M PLUS Rounded 1c", sans-serif; box-shadow: 1px 1px 4px rgba(0,0,0,0.1);}
+    .j-author { font-weight: bold; color: #5c5346; font-size: 16px; }
+    .j-text { font-size: 15px; color: #5c5346; line-height: 1.6; white-space: pre-wrap; margin-bottom: 5px; }
+    .j-img { width: 100%; border-radius: 16px; margin-top: 12px; max-height: 400px; object-fit: cover; }
+    .delete-btn { background: none; border: none; cursor: pointer; font-size: 16px; color: #d5cda3; padding: 4px; transition: 0.2s; }
+    .delete-btn:hover { color: #e07a5f; transform: scale(1.1); }
+
+    .xhs-box { background: #e8f5e9; border: 2px solid #a5d6a7; padding: 12px; border-radius: 14px; margin-bottom: 15px; font-size: 14px; }
+    .xhs-link { display: inline-block; background: #ff4d4d; color: white; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 12px; margin-top: 5px;}
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header><div style="text-align: center;"><h1 class="title">Canada Go! 🍁</h1><p class="subtitle">2026 洛磯山脈自駕慢遊｜6大3小 雙車 15日</p></div></header>
+    <main class="content-area">
+      <!-- 📋 行程頁面 -->
+      <div id="schedule-view" class="view-section"><div id="weather-container">
+          <div class="weather-card">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="weather-icon">⛅</div>
+              <div>
+                <div><strong>雷夫爾斯托克</strong>｜8-14°C</div>
+                <div style="font-size: 11px; margin-top: 2px; color: #8a8174;">🚗 車程預估: 3h ｜ 💡 進入山區</div>
+              </div>
+            </div>
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #d5cda3; font-size: 13px; color: #3b8a7c; font-weight: bold;">
+              🎯 🍦 湖畔絕美木棧橋 ＋ 超可愛牧場看駱馬吃冰淇淋！
+            </div>
+          </div></div><div class="date-tabs hide-scrollbar" id="tabs-container"><div class="tab " onclick="changeDay('9/24')"><span class="day-text">D1</span><span class="day-num">24</span></div><div class="tab " onclick="changeDay('9/25')"><span class="day-text">D2</span><span class="day-num">25</span></div><div class="tab " onclick="changeDay('9/26')"><span class="day-text">D3</span><span class="day-num">26</span></div><div class="tab active" onclick="changeDay('9/27')"><span class="day-text">D4</span><span class="day-num">27</span></div><div class="tab " onclick="changeDay('9/28')"><span class="day-text">D5</span><span class="day-num">28</span></div><div class="tab " onclick="changeDay('9/29')"><span class="day-text">D6</span><span class="day-num">29</span></div><div class="tab " onclick="changeDay('9/30')"><span class="day-text">D7</span><span class="day-num">30</span></div><div class="tab " onclick="changeDay('10/1')"><span class="day-text">D8</span><span class="day-num">1</span></div><div class="tab " onclick="changeDay('10/2')"><span class="day-text">D9</span><span class="day-num">2</span></div><div class="tab " onclick="changeDay('10/3')"><span class="day-text">D10</span><span class="day-num">3</span></div><div class="tab " onclick="changeDay('10/4')"><span class="day-text">D11</span><span class="day-num">4</span></div><div class="tab " onclick="changeDay('10/5')"><span class="day-text">D12</span><span class="day-num">5</span></div><div class="tab " onclick="changeDay('10/6')"><span class="day-text">D13</span><span class="day-num">6</span></div><div class="tab " onclick="changeDay('10/7')"><span class="day-text">D14</span><span class="day-num">7</span></div></div><div id="schedule-container"><div class="schedule-card"><div class="time-badge ">08:30</div><div class="info"><h3>出發往 Salmon Arm 🚙</h3><p style="white-space:pre-wrap;">沿 Hwy 1 出發</p></div></div><div class="schedule-card"><div class="time-badge ">09:30</div><div class="info"><h3>鮭魚灣木棧橋 🐟</h3><p style="white-space:pre-wrap;">Salmon Arm 湖畔散步，風景驚艷</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Salmon%20Arm%20Wharf" target="_blank" class="map-link">📍 導航</a></div></div><div class="schedule-card"><div class="time-badge ">10:15</div><div class="info"><h3>出發往 Sicamous 🚙</h3><p style="white-space:pre-wrap;">繼續往東行駛</p></div></div><div class="schedule-card"><div class="time-badge ">10:45</div><div class="info"><h3>荷蘭牧場冰淇淋 🍦</h3><p style="white-space:pre-wrap;">D. Dutchmen Dairy，吃冰淇淋看駱馬跟小牛！</p><a href="https://www.google.com/maps/search/?api=1&amp;query=D.%20Dutchmen%20Dairy%2C%20Sicamous" target="_blank" class="map-link">📍 導航</a></div></div><div class="schedule-card"><div class="time-badge ">11:30</div><div class="info"><h3>出發往 Revelstoke 🚙</h3><p style="white-space:pre-wrap;">驅車前往雷夫爾斯托克</p></div></div><div class="schedule-card"><div class="time-badge bg-red">12:30</div><div class="info"><h3>抵達 Revelstoke 鎮上</h3><p style="white-space:pre-wrap;">自行覓食午餐</p></div></div><div class="schedule-card"><div class="time-badge ">14:00</div><div class="info"><h3>Revelstoke 市區散步 🚶</h3><p style="white-space:pre-wrap;">逛精品小店、巷弄藝廊。
+🌧️ 雨備：Revelstoke Railway Museum</p><a href="https://maps.app.goo.gl/Dsh43Cqc414N4BwAA" target="_blank" class="map-link block">📍 雨備：鐵道博物館</a></div></div><div class="schedule-card"><div class="time-badge ">16:00</div><div class="info"><h3>Save-On-Foods 採買 🛒</h3><p style="white-space:pre-wrap;">Victoria St，Revelstoke 最大超市採買晚餐食材</p><a href="https://maps.app.goo.gl/WCaRrBJm6N4hpq1a6" target="_blank" class="map-link">📍 導航</a></div></div><div class="schedule-card"><div class="time-badge bg-green">17:00</div><div class="info"><h3>Grizz Hotel 入住 🏨</h3><p style="white-space:pre-wrap;">狀態：已付款</p><a href="https://maps.app.goo.gl/n1QZPsi7FZQcNbrn8" target="_blank" class="map-link">📍 導航</a></div></div><div class="schedule-card"><div class="time-badge ">18:30</div><div class="info"><h3>超市自理 🍽️</h3><p style="white-space:pre-wrap;">享用稍早採買的晚餐</p></div></div></div></div>
+
+      <!-- 💰 記帳頁面 -->
+      <div id="expense-view" class="view-section hidden">
+        <div class="sub-nav"><button class="sub-btn active" onclick="switchSubTab('ex', 'add', this)">新增記帳</button><button class="sub-btn" onclick="switchSubTab('ex', 'list', this)">明細總覽</button></div>
+        <div id="ex-add-view" class="expense-card">
+          <div class="form-row"><div class="form-group half"><label>幣別</label><select id="ex-currency"><option value="CAD">加幣 (CAD)</option><option value="TWD">台幣 (TWD)</option></select></div><div class="form-group half"><label>金額</label><input type="number" id="ex-amount" placeholder="0.00"></div></div>
+          <div class="form-group"><label>消費項目</label><input type="text" id="ex-item" placeholder="如: 機票、晚餐、伴手禮..."></div>
+          <div class="form-group"><label>消費地點</label><input type="text" id="ex-location" placeholder="如: 大統華, 某餐廳..."></div>
+          <div class="form-row"><div class="form-group half"><label>付款人</label><select id="ex-payer" onchange="handlePayerChange()"><option value="阿庫">阿庫</option><option value="小鳥">小鳥</option><option value="胖汁">胖汁</option></select></div><div class="form-group half"><label>付款方式</label><select id="ex-method"><option value="信用卡">💳 信用卡</option><option value="現金">💵 現金</option></select></div></div>
+          <div class="form-group"><label>帳務狀態</label><select id="ex-status" onchange="handleStatusChange()"><option value="未結">❌ 團體代墊 (尚未還款)</option><option value="已結">✅ 團體公費 (已結清)</option><option value="個人">🧍 個人/自家花費 (不須分攤)</option></select></div>
+          <div class="form-group"><label>分攤對象</label><div class="checkbox-group"><label><input type="checkbox" class="ex-split" value="阿庫" checked=""> 阿庫</label><label><input type="checkbox" class="ex-split" value="小鳥" checked=""> 小鳥</label><label><input type="checkbox" class="ex-split" value="胖汁" checked=""> 胖汁</label></div></div>
+          <div class="form-group"><label>消費日期</label><input type="date" id="ex-date"></div>
+          <div class="form-group"><label>收據照片（選填）</label><input type="file" id="ex-receipt" accept="image/*" style="font-size: 13px;"></div>
+          <button class="submit-btn" onclick="submitExpense()">送出記帳</button><p id="expense-status" style="font-size: 12px; text-align: center; margin-top: 10px; color: #8a8174;"></p>
+        </div>
+        <div id="ex-list-view" class="expense-card hidden">
+          <div class="filter-group"><button class="filter-btn active" onclick="filterExpenses('全體', this)">全體</button><button class="filter-btn" onclick="filterExpenses('阿庫', this)">阿庫</button><button class="filter-btn" onclick="filterExpenses('小鳥', this)">小鳥</button><button class="filter-btn" onclick="filterExpenses('胖汁', this)">胖汁</button></div>
+          <div id="expense-summary-container"></div><div id="expense-daily-list"></div>
+        </div>
+      </div>
+
+      <!-- 📖 🌟 旅途日誌頁面 -->
+      <div id="journal-view" class="view-section hidden">
+        <div class="journal-header-area">
+          <div><h2 style="margin: 0; color: #6a6256; font-size: 22px; font-weight: bold;">旅行日誌</h2><p style="margin: 2px 0 0 0; font-size: 11px; color: #8a8174; font-weight: bold;">紀錄旅途中的每一個精彩瞬間</p></div>
+          <button id="show-journal-form-btn" class="write-btn" onclick="toggleJournalForm(true)">✍️ 寫日誌</button>
+        </div>
+        <div id="journal-form-container" class="expense-card hidden" style="margin-bottom: 20px;">
+          <h3 style="margin-top:0; color:#5c5346; border-bottom: 2px dashed #f0ead2; padding-bottom: 8px;">✍️ 寫篇新日誌</h3>
+          <div class="form-group"><label>發布者</label><select id="j-author"><option value="阿庫">阿庫</option><option value="小鳥">小鳥</option><option value="胖汁">胖汁</option><option value="芝麻">芝麻</option><option value="小蘋果">小蘋果</option><option value="均均">均均</option></select></div>
+          <div class="form-group"><label>想分享什麼心情？</label><textarea id="j-text" rows="3" placeholder="洛磯山脈的風景實在太驚人了..."></textarea></div>
+          <div class="form-group"><label>上傳照片</label><input type="file" id="j-image" accept="image/*" style="font-size: 13px;"></div>
+          <div style="display: flex; gap: 10px; margin-top: 10px;"><button class="sub-btn" onclick="toggleJournalForm(false)" style="flex: 1;">取消</button><button class="submit-btn" id="j-submit-btn" style="flex: 2; margin-top: 0; background: #6b9e7d; box-shadow: 2px 2px 0px #4d7a5d;">發布 🚀</button></div>
+          <p id="j-status" style="font-size: 12px; text-align: center; margin-top: 10px; color: #8a8174;"></p>
+        </div>
+        <div id="journal-feed"><div class="journal-date-divider"><div class="journal-date-pill">2026-06-15</div><div class="journal-date-line"></div></div>
+              <div class="journal-post" id="post-bACI34VeVUPdYHeB3JV5">
+                <div class="j-header">
+                  <div class="j-author-info"><div class="j-avatar" style="background-color: #87a8a4;">胖</div><span class="j-author">胖汁</span><span style="font-size: 11px; color: #c4bcae; margin-left: 4px;">12:52</span></div>
+                  <button class="delete-btn" onclick="deleteJournal('bACI34VeVUPdYHeB3JV5', 'https://firebasestorage.googleapis.com/v0/b/canadago2026.firebasestorage.app/o/journals%2F1781499163347_IMG_2152.jpeg?alt=media&token=e5d1dfa2-1a66-4503-af82-3a9be91e09e8')" title="刪除">🗑️</button>
+                </div>
+                <div class="j-text">Test test</div><img src="./Canada Go! 2026_files/1781499163347_IMG_2152.jpeg" class="j-img" loading="lazy">
+              </div><div class="journal-date-divider"><div class="journal-date-pill">2026-06-14</div><div class="journal-date-line"></div></div>
+              <div class="journal-post" id="post-KTOwmYczSIE6lpFZnJ2i">
+                <div class="j-header">
+                  <div class="j-author-info"><div class="j-avatar" style="background-color: #7ab3d6;">芝</div><span class="j-author">芝麻</span><span style="font-size: 11px; color: #c4bcae; margin-left: 4px;">19:58</span></div>
+                  <button class="delete-btn" onclick="deleteJournal('KTOwmYczSIE6lpFZnJ2i', 'https://firebasestorage.googleapis.com/v0/b/canadago2026.firebasestorage.app/o/journals%2F1781438277796_IMG_2803.jpeg?alt=media&token=56f5685f-83cc-46d5-8904-3c50a35235c8')" title="刪除">🗑️</button>
+                </div>
+                <div class="j-text">測試看看</div><img src="./Canada Go! 2026_files/1781438277796_IMG_2803.jpeg" class="j-img" loading="lazy">
+              </div></div>
+      </div>
+
+      <!-- 🎒 攻略頁面 -->
+      <div id="guide-view" class="view-section hidden">
+        <div class="sub-nav"><button class="sub-btn active" onclick="switchSubTab('guide', 'links', this)">清單下載</button><button class="sub-btn" onclick="switchSubTab('guide', 'notes', this)">行前須知</button></div>
+        <div id="guide-links-view" class="expense-card">
+          <h3 style="margin-top:0; border-bottom: 2px dashed #f0ead2; padding-bottom: 8px;">預訂與證件</h3><label class="check-item"><input type="checkbox"> 夢蓮湖接駁車 <a href="https://reservation.pc.gc.ca/" target="_blank">預訂連結</a></label><label class="check-item"><input type="checkbox"> 哥倫比亞冰原 <a href="https://columbiaicefield.com/" target="_blank">預訂連結</a></label><label class="check-item"><input type="checkbox"> Maligne Lake 遊船 <a href="https://banffjaspercollection.com/" target="_blank">預訂連結</a></label><label class="check-item"><input type="checkbox"> 加拿大 eTA，每人 CAD$7</label><label class="check-item"><input type="checkbox"> Discovery Pass 年票（CAD$75/車）</label>
+          <h3 style="margin-top:20px; border-bottom: 2px dashed #f0ead2; padding-bottom: 8px;">必備 App 下載</h3><label class="check-item"><input type="checkbox"> 511 Alberta App（亞省路況）</label><label class="check-item"><input type="checkbox"> DriveBC App（BC省路況）</label><label class="check-item"><input type="checkbox"> Google Maps 離線地圖（冰原大道段）</label><label class="check-item"><input type="checkbox"> My Aurora Forecast（KP指數＋極光概率）</label><label class="check-item"><input type="checkbox"> SpaceWeatherLive（太陽風數據）</label><p style="font-size:12px; color:#e07a5f; margin-top:5px;">💡 2024–2026 是太陽活動高峰期，極光機率最高！</p>
+        </div>
+
+        <!-- 🌟 修復版行前須知 (已移除重複字詞) -->
+        <div id="guide-notes-view" class="expense-card note-content hidden">
+          <div class="xhs-box">
+            📌 <strong>2026 加拿大入境最新規定公告</strong><br>
+            包含最新通關流程、證件查驗及攜帶物品限制。<br>
+            <a href="http://xhslink.com/o/9y7cQhDKIRr" target="_blank" class="xhs-link">📕 點我查看小紅書指南</a>
+          </div>
+
+          <h3>✨ 追光必備</h3><p>暖暖包 + 保溫瓶熱飲 + 三腳架</p>
+          <h3>🌤️ 10月初洛磯山天氣</h3><ul><li>白天 10–15°C，夜晚 -2 ~ +5°C</li><li>山區天氣 5 分鐘變一次，可能下雪</li><li>楓葉旺季 + 第一波雪景並存</li><li>出發前查 511 Alberta 路況</li></ul>
+          <h3>🎒 必帶行李</h3><ul><li>洋蔥式穿搭：薄長袖+毛背心+防風外套</li><li>防水鞋（可能下雨/雪/泥）</li><li>保暖手套、毛帽、圍巾（看極光必備！）</li><li>萬用轉接頭（加拿大是 Type A/B）</li><li>行動電源（手機拍極光超耗電）</li></ul>
+          <h3>🚙 自駕重點</h3><ul><li><strong>冰原大道全段無訊號</strong>，出發前下載離線地圖</li><li>油站很少：滿油再出發、隨時加油</li><li>限速嚴格，國家公園 60–90 km/h</li><li>早出早回，10月日落 18:30 後天黑</li></ul>
+          <h3>👶 帶小孩特別注意 (最小3歲)</h3><p><strong>🍪 零食水永遠多帶</strong><br>長途車程小孩最容易吵，零食+iPad預載動畫=救命組合。</p><p><strong>🚻 主動安排廁所</strong><br>看到加油站、遊客中心一定先停。 93號公路只有一間休息站。</p>
+        </div>
+      </div>
+
+      <!-- 🎫 體驗頁面 -->
+      <div id="ticket-view" class="view-section hidden">
+        <div class="expense-card"><h2 style="margin-top:0; color:#e59e35; border-bottom: 2px solid #f0ead2; padding-bottom:10px;">景點體驗 · 需提前訂票</h2><div class="ticket-item"><h3>❄️ Columbia Icefield Ice Explorer</h3><p>搭大輪徑雪車直開上冰川。</p><div class="tag">CAD$99/大人, CAD$50/小孩</div><a href="https://www.banffjaspercollection.com/attractions/columbia-icefield-adventure/" target="_blank" class="map-link">前往預訂</a></div><div class="ticket-item"><h3>⛴️ Maligne Lake Spirit Island 遊船</h3><p>加拿大最具代表性湖景。</p><div class="tag">CAD$89/人</div><a href="https://banffjaspercollection.com/" target="_blank" class="map-link">前往預訂</a></div><div class="ticket-item"><h3>♨️ Miette Hot Springs 溫泉</h3><p>全加最熱天然礦泉。</p><div class="tag">成人CAD$17.50, 兒童CAD$8</div></div></div>
+      </div>
+    </main>
+    <nav class="bottom-nav">
+      <div class="nav-item active" onclick="switchMainTab('schedule', this)"><div class="icon">📋</div><span>行程</span></div>
+      <div class="nav-item" onclick="switchMainTab('expense', this)"><div class="icon">💰</div><span>記帳</span></div>
+      <div class="nav-item" onclick="switchMainTab('journal', this)"><div class="icon">📖</div><span>日誌</span></div>
+      <div class="nav-item" onclick="switchMainTab('guide', this)"><div class="icon">🎒</div><span>攻略</span></div>
+      <div class="nav-item" onclick="switchMainTab('ticket', this)"><div class="icon">🎫</div><span>體驗</span></div>
+    </nav>
+  </div>
+
+  <script>
+    const EX_RATE = 23.5;
+    const getMapUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+
+    // 🌟 更新版 14 天行程 (包含第7天 Klook 一日遊大改版)
+    const itineraryData = [
+      { day: "9/24", title: "D1", drive: "飛行 15h 20m", highlight: "✈️ 跨越換日線，抵達溫哥華溫馨別墅！", weather: { icon: "⛅", text: "溫哥華 Richmond", temp: "12-16°C", note: "秋高氣爽" }, events: [
+        { time: "21:05", title: "台北起飛 ✈️", desc: "TPE 桃園起飛 -> HKG 轉機 -> YVR 溫哥華\nCX479/CX888，飛行 15h 20m" },
+        { time: "21:25", title: "抵達 YVR 溫哥華", desc: "跨越換日線賺一天！完成海關入境。" },
+        { time: "23:30", title: "入住 Vancouver UBC GIGI Villa（吉祥別墅） 🏡", desc: "狀態：已付款", mapUrl: getMapUrl("1938 W 36th Ave, Vancouver, British Columbia, Canada") }
+      ]},
+      { day: "9/25", title: "D2", drive: "市區移動", highlight: "🛍️ Outlet 血拼狂歡 ＋ 大統華無敵大補給！", weather: { icon: "🌤️", text: "溫哥華 Richmond", temp: "13-18°C", note: "適合逛街" }, events: [
+        { time: "10:00", title: "McArthurGlen Outlet 🛍️", desc: "抵達 Outlet", mapUrl: getMapUrl("McArthurGlen Outlet Vancouver 加拿大 British Columbia, Richmond, Cessna Dr, 邮政编码: V7B 1K2") },
+        { time: "12:00", title: "Outlet 美食街午餐 🍔", desc: "用餐時間 (1.5h)" },
+        { time: "13:30", title: "自由活動 🚶", desc: "Outlet 繼續逛街購物" },
+        { time: "16:00", title: "大統華 T&T 採買 🛒", desc: "採買鍋底、白米、泡麵等華人食材，後段山區完全買不到！", links: [{ label: "📍 大統華", url: "https://maps.app.goo.gl/sSSrgZNQEHp9GJpo7" }, { label: "📍 T&T", url: "https://maps.app.goo.gl/mJ6jDrnyDZyX9q396" }] },
+        { time: "17:00", title: "領取 Minivan 🚙", desc: "請點擊下方專屬導航取車：", links: [{ label: "📍 阿庫/胖汁 取車", url: "https://maps.app.goo.gl/CQusKwwBzRbk32fk6" }, { label: "📍 小鳥 取車", url: getMapUrl("3880 GRANT MCCONACHIE WAY,RICHMOND,BC,V7B 1K2,CA") }] },
+        { time: "18:00", title: "別墅開伙 🍲", desc: "Vancouver UBC GIGI Villa（吉祥別墅）廚房大開伙" }
+      ]},
+      { day: "9/26", title: "D3", drive: "3.5h", highlight: "🚙 挺進內陸小鎮，河岸公園綠地徹底放電", weather: { icon: "☁️", text: "前往 Kamloops", temp: "10-15°C", note: "注意長途開車" }, events: [
+        { time: "09:30", title: "出發往 Hope 🚙", desc: "沿 Hwy 1 出發" },
+        { time: "11:00", title: "Hope 小鎮停靠 ☕", desc: "看電鋸木雕，Home Restaurant 午餐", links: [{ label: "📍 電鋸木雕", url: "https://maps.app.goo.gl/bdznt37roYDkPM9B7" }, { label: "📍 Memorial Park", url: "https://maps.app.goo.gl/LvAZQuXNz4RyhU7K9" }, { label: "📍 餐廳導航", url: "https://www.google.com/maps/place/Home+Restaurant/@49.3758581,-121.4297094,17z/data=!4m15!1m8!3m7!1s0x5483f5b3644c7eed:0x69857140a0cd23b0!2zNjY1IE9sZCBIb3BlIFByaW5jZXRvbiBXYXksIEhvcGUsIEJDIFYwWCAxTDTliqDmi7_lpKc!3b1!8m2!3d49.3758546!4d-121.4271345!16s%2Fg%2F11bw4pnr08!3m5!1s0x5483f5b36fbb5927:0xbf2a2156dc6b6b1e!8m2!3d49.3758583!4d-121.4271316!16s%2Fg%2F1tfhz88n?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" }] },
+        { time: "13:30", title: "出發 Kamloops 🚙", desc: "沿 Hwy 5 繼續前進" },
+        { time: "15:30", title: "Riverside Park 🏞️", desc: "河岸草地讓小孩放電。\n🌧️ 雨備：BIG Little Science Centre", links: [{ label: "📍 公園導航", url: getMapUrl("Riverside Park, Kamloops") }, { label: "📍 雨備：科學中心", url: "https://maps.app.goo.gl/2SRncDXhcwi6ZeWb8" }] },
+        { time: "16:30", title: "Superstore 採買 🛒", desc: "採買食材", mapUrl: "https://www.google.com/maps/place/Real+Canadian+Superstore+Columbia+Street/@50.6684466,-120.3585823,17z/data=!4m15!1m8!3m7!1s0x537e2c5eb53bfb85:0xc26abe4179a7edb3!2zOTEwIENvbHVtYmlhIFN0IFcsIEthbWxvb3BzLCBCQyBWMkMgMUwy5Yqg5ou_5aSn!3b1!8m2!3d50.6684175!4d-120.3552533!16s%2Fg%2F11bw3y5y2n!3m5!1s0x537e2c5932409111:0x537196fdebd769ba!8m2!3d50.6688244!4d-120.356093!16s%2Fg%2F1tmxqpj_?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" },
+        { time: "17:30", title: "Grandview Motel 入住 🏨", desc: "狀態：入住時付款", mapUrl: getMapUrl("463 Grandview motel, Kamloops, BC") },
+        { time: "18:30", title: "超市熟食自理 🍽️", desc: "回房享用美食休息" }
+      ]},
+      { day: "9/27", title: "D4", drive: "3h", weather: { icon: "⛅", text: "雷夫爾斯托克", temp: "8-14°C", note: "進入山區" }, highlight: "🍦 湖畔絕美木棧橋 ＋ 超可愛牧場看駱馬吃冰淇淋！", events: [
+        { time: "08:30", title: "出發往 Salmon Arm 🚙", desc: "沿 Hwy 1 出發" },
+        { time: "09:30", title: "鮭魚灣木棧橋 🐟", desc: "Salmon Arm 湖畔散步，風景驚艷", mapUrl: getMapUrl("Salmon Arm Wharf") },
+        { time: "10:15", title: "出發往 Sicamous 🚙", desc: "繼續往東行駛" },
+        { time: "10:45", title: "荷蘭牧場冰淇淋 🍦", desc: "D. Dutchmen Dairy，吃冰淇淋看駱馬跟小牛！", mapUrl: getMapUrl("D. Dutchmen Dairy, Sicamous") },
+        { time: "11:30", title: "出發往 Revelstoke 🚙", desc: "驅車前往雷夫爾斯托克" },
+        { time: "12:30", title: "抵達 Revelstoke 鎮上", desc: "自行覓食午餐" },
+        { time: "14:00", title: "Revelstoke 市區散步 🚶", desc: "逛精品小店、巷弄藝廊。\n🌧️ 雨備：Revelstoke Railway Museum", links: [{ label: "📍 雨備：鐵道博物館", url: "https://maps.app.goo.gl/Dsh43Cqc414N4BwAA" }] },
+        { time: "16:00", title: "Save-On-Foods 採買 🛒", desc: "Victoria St，Revelstoke 最大超市採買晚餐食材", mapUrl: "https://maps.app.goo.gl/WCaRrBJm6N4hpq1a6" },
+        { time: "17:00", title: "Grizz Hotel 入住 🏨", desc: "狀態：已付款", mapUrl: "https://maps.app.goo.gl/n1QZPsi7FZQcNbrn8" },
+        { time: "18:30", title: "超市自理 🍽️", desc: "享用稍早採買的晚餐" }
+      ]},
+      { day: "9/28", title: "D5", drive: "1.5h", highlight: "🚠 搭乘 Revelation 高空纜車 ＋ 漫步山區行人木橋", weather: { icon: "🌤️", text: "黃金鎮 Golden", temp: "5-12°C", note: "早晚偏涼" }, events: [
+        { time: "09:30", title: "途經 Glacier NP 🌲", desc: "⚠️ 需 Parks Pass。前往 Revelation Gondola 山腳" },
+        { time: "10:00", title: "Revelation 纜車 🚠", desc: "搭乘纜車欣賞山景", mapUrl: getMapUrl("Revelation Gondola, Revelstoke") },
+        { time: "12:00", title: "出發往 Golden 🚙", desc: "前往黃金鎮" },
+        { time: "13:30", title: "抵達 Golden / 覓食 🍔", desc: "鎮上自行覓食午餐" },
+        { time: "15:00", title: "Golden 吊橋 🌉", desc: "備註：Golden Skybridge ($45/成人，6歲以下免費，需 2h)\n🌧️ 雨備：有室內咖啡暖身區 · 大雨改逛市區", links: [{ label: "📍 Golden 吊橋", url: "https://maps.app.goo.gl/cExmM6cwnsh2rGoZ8" }, { label: "📍 Kicking Horse 行人橋", url: "https://maps.app.goo.gl/Y7iuzx2DvqR21K3B9" }] },
+        { time: "16:00", title: "Save-On-Foods 採買 🛒", desc: "採買晚餐食材", mapUrl: "https://maps.app.goo.gl/WCaRrBJm6N4hpq1a6" },
+        { time: "17:00", title: "Super 8 by Wyndham Kamloops On The Hill 入住 🏨", desc: "狀態：已付款", mapUrl: "https://maps.app.goo.gl/pMhN2a7BEz1iXuiP9" },
+        { time: "18:30", title: "超市自理 🍽️", desc: "自理晚餐休息" }
+      ]},
+      { day: "9/29", title: "D6", drive: "1.5h", highlight: "🌲 翡翠湖絕美倒影 ＋ 奢華別墅之夜與深夜極光狩獵！", weather: { icon: "❄️", text: "坎莫爾 Canmore", temp: "2-10°C", note: "洋蔥式穿搭" }, events: [
+        { time: "09:00", title: "出發 🚙", desc: "前往幽鶴國家公園" },
+        { time: "09:50", title: "Yoho National Park Of Canada（幽鶴國家公園）🌲", desc: "欣賞天然橋與翡翠湖絕美冰川湖", links: [{ label: "📍 國家公園", url: "https://maps.app.goo.gl/UKPxzDgY7BjAgLds5" }, { label: "📍 天然橋", url: "https://maps.app.goo.gl/yfHwCzUsC9pMTy9x8" }, { label: "📍 翡翠湖", url: "https://maps.app.goo.gl/p79jinJ12wmGN2WPA" }] },
+        { time: "10:45", title: "出發 🚙", desc: "前往 Lake Louise Village" },
+        { time: "11:10", title: "抵達 Lake Louise Village North", desc: "村內漫步準備用餐", mapUrl: "https://maps.app.goo.gl/7QXdes3u1iYxSugeA" },
+        { time: "11:30", title: "Trailhead Café 午餐 🍔", desc: "享用美味午餐", mapUrl: "https://maps.app.goo.gl/qGHMqRQgsrN8FUqq7" },
+        { time: "13:00", title: "出發 🚙", desc: "前往 Canmore" },
+        { time: "14:00", title: "Policeman's Creek Boardwalk 🚶", desc: "全平坦木棧道散步放鬆", mapUrl: "https://maps.app.goo.gl/Zj4YKd5yxLdbR3he7" },
+        { time: "15:30", title: "超市大採買 🛒", desc: "💡 備註：Canmore Safeway 是洛磯山最後大型超市，務必在此補齊後段自煮食材！\n📌 記得：得準備 D8 去 Bow lake 湖畔野餐的食材！", links: [{ label: "📍 Safeway", url: "https://maps.app.goo.gl/36jxkSSAStvb9Wqy6" }, { label: "📍 Save-On-Foods", url: "https://maps.app.goo.gl/UeePeWVdb1pXGskw7" }] },
+        { time: "17:00", title: "入住 THE ROCK GARDEN 🏡", desc: "Spring Creek 奢華兩晚！！狀態：已付款", mapUrl: "https://maps.app.goo.gl/ze63fz6Hnc96cMwVA" },
+        { time: "18:00", title: "別墅開伙 🍲", desc: "別墅廚房開伙，享受奢華之夜" },
+        { time: "22:00", title: "極光追蹤 ✨", desc: "極光選項：", links: [{ label: "📍 Quarry Lake Park", url: "https://maps.app.goo.gl/G2nDmv8Evy3bKGdr9" }, { label: "📍 Lake Minnewanka", url: "https://maps.app.goo.gl/cUFyM2PKR7DPbzPz8" }] }
+      ]},
+      // 🌟 第七天大更新：Klook 無腦接駁一日遊
+      { day: "9/30", title: "D7", drive: "Klook一日遊接駁", highlight: "🚌 Klook 懶人包一日遊！無腦暢遊夢蓮湖、露易絲湖與峽谷", weather: { icon: "⛅", text: "班夫 Banff", temp: "0-12°C", note: "注意保暖" }, events: [
+        { time: "08:40", title: "Klook 一日遊集合出發 🚌", desc: "於 Tourism Canmore 集合，準備展開 8-10 小時的懶人包行程！", mapUrl: "https://maps.app.goo.gl/Swprhbd6ipiG9u7m8" },
+        { time: "09:00", title: "Klook 專車導覽 (約 8-10h) 🏞️", desc: "行程包含：班夫路易斯湖、夢蓮湖、強斯頓峽谷、班夫鎮。\n💡 確切的各景點停留與午餐時間，以訂購後的最終憑證為準！不用自己開車找車位就是爽！" },
+        { time: "17:30", title: "結束行程 / 回 Canmore 別墅 🏡", desc: "回到早上的集合點，解散後返回別墅休息。" },
+        { time: "18:00", title: "別墅最後開伙 🍲", desc: "別墅廚房最後一晚開伙，清空食材！" },
+        { time: "22:00", title: "極光追蹤 ✨", desc: "前往 Vermilion Lakes 追光", mapUrl: "https://maps.app.goo.gl/ZVP1uarnmbT5SDqaA" }
+      ]},
+      { day: "10/1", title: "D8", drive: "3.5h", highlight: "🌨️ 漫遊世界最美「冰原大道」！弓湖野餐與萬年冰川大合照", weather: { icon: "🌨️", text: "冰原大道 Icefields", temp: "-2-8°C", note: "全線無訊號" }, events: [
+        { time: "09:00", title: "冰原大道北上 ❄️", desc: "注意：全線 230km 無手機訊號" },
+        { time: "10:30", title: "弓湖野餐 🥪", desc: "Bow Lake 湖畔長椅野餐，享用在 Safeway 準備的食材", mapUrl: "https://maps.app.goo.gl/XJvRzeDfJPYYZSUa7" },
+        { time: "12:00", title: "出發北上 🚙", desc: "繼續北上，沿途欣賞冰原大道風景" },
+        { time: "12:15", title: "佩托湖觀景台 📸", desc: "Peyto Lake 停車拍照", mapUrl: getMapUrl("Peyto Lake Viewpoint") },
+        { time: "12:30", title: "出發北上 🚙", desc: "繼續前往哥倫比亞冰原" },
+        { time: "13:30", title: "阿薩巴斯卡冰河 📸", desc: "Athabasca Glacier 觀賞萬年冰川與拍大合照", mapUrl: "https://maps.app.goo.gl/fgUXu7wCnKm35XL6A" },
+        { time: "14:00", title: "Sunwapta Falls 💦", desc: "路旁快停，欣賞壯觀的桑瓦普塔瀑布與急流", mapUrl: "https://maps.app.goo.gl/seDHVNz9GeXiRmoq7" },
+        { time: "14:10", title: "前往 Hinton 🚙", desc: "驅車前往下榻小鎮" },
+        { time: "16:00", title: "Walmart 採買 🛒", desc: "抵達 Walmart Supercenter 大採買（補齊後面四晚份食材，這裡 CP 值最高！）", mapUrl: "https://maps.app.goo.gl/sdDvnTXLe9K4sQkP7" },
+        { time: "17:30", title: "Hinton 飯店入住 🏨", desc: "Howard Johnson by Wyndham Hinton。狀態：9/29已扣款 6166元，押金200加幣現場付", mapUrl: "https://maps.app.goo.gl/rtoF2Mr7A64B3YRu9" }
+      ]},
+      { day: "10/2", title: "D9", drive: "市區移動", highlight: "⛴️ 瑪琳湖精靈島遊船 ＋ 🌌 新月夜金字塔湖極光大爆發！", weather: { icon: "🌌", text: "賈斯伯 Jasper", temp: "-2-10°C", note: "新月極光最強夜" }, events: [
+        { time: "09:30", title: "出發往 Jasper 🚙", desc: "準備前往瑪琳湖景區" },
+        { time: "10:15", title: "Maligne Lake ⛰️", desc: "抵達景區漫步", mapUrl: "https://maps.app.goo.gl/p84PgMVJmjr7ZpabA" },
+        { time: "10:30", title: "藥湖 Medicine Lake 觀看 📸", desc: "神奇的巫藥湖，停車拍照觀看", mapUrl: "https://maps.app.goo.gl/DVLKTpHGkfhK9Jnd8" },
+        { time: "11:00", title: "Spirit Island 遊船 ⛴️", desc: "精靈島經典遊船體驗（船程約 90 分鐘，需提前訂票）", mapUrl: "https://maps.app.goo.gl/SQMxE3iWk7kgMuSj8" },
+        { time: "12:30", title: "瑪琳湖畔自行覓食 🍔", desc: "當下隨便找餐廳享用午餐" },
+        { time: "14:00", title: "出發往 Hinton 🚙", desc: "準備回鎮上補給休息" },
+        { time: "16:00", title: "超市補充物資 🛒", desc: "補給今晚追光必備的熱飲與暖暖包！" },
+        { time: "19:00", title: "飯店廚房自煮 🍳", desc: "回到飯店大開伙享用晚餐" },
+        { time: "22:00", title: "出發追光 🚙", desc: "今晚是新月，極光最清晰、最強的日子！" },
+        { time: "22:45", title: "抵達 Pyramid Lake ✨", desc: "架設三腳架，捕捉金字塔湖的絕美極光大爆發！", mapUrl: "https://maps.app.goo.gl/pMC3oeYZZ6nL5d9M9" },
+        { time: "01:00", title: "最晚返程 ⏱️", desc: "最晚此時必須出發返回 Hinton 飯店休息，注意深夜開山路動物出沒！" }
+      ]},
+      { day: "10/3", title: "D10", drive: "市區移動", highlight: "🚡 賈斯伯高空高山纜車 ＋ ♨️ 享受全加最熱天然礦泉溫泉", weather: { icon: "☀️", text: "賈斯伯 Jasper", temp: "0-12°C", note: "泡溫泉好日子" }, events: [
+        { time: "早上", title: "睡到自然醒 😴", desc: "前一天追光太累，今天要睡到自然醒！" },
+        { time: "10:30", title: "出發往 Jasper 🚙", desc: "準備前往搭乘纜車" },
+        { time: "11:15", title: "Jasper SkyTram 🚡", desc: "登頂俯瞰洛磯山全景 (約2.5小時)\n⚠️ 10月中旬關閉，出發前需再次確認\n🌧️ 雨備：若雷雨停駛改去 Jasper-Yellowhead Museum (免費)", links: [{ label: "📍 纜車導航", url: "https://maps.app.goo.gl/ZDc23qoQT4M3ifE8A" }, { label: "📍 雨備：博物館", url: "https://maps.app.goo.gl/H8VNxQm3wDaEn6Kk6" }] },
+        { time: "13:30", title: "Jasper 鎮上覓食 🍔", desc: "自行覓食午餐" },
+        { time: "15:00", title: "出發 🚙", desc: "前往 Miette Hot Springs" },
+        { time: "16:00", title: "Miette 溫泉 ♨️", desc: "泡全加最熱天然礦泉\n⚠️ 10月中旬關閉，出發前需再次確認\n🌧️ 雨備：溫泉下雨完全沒問題，路封才改期", mapUrl: "https://maps.app.goo.gl/6ef9gVADpExg89sU9" },
+        { time: "17:30", title: "出發回程 🚙", desc: "前往 Hinton 回住宿地" },
+        { time: "19:00", title: "飯店廚房自煮 🍲", desc: "大家一起開伙準備晚餐" },
+        { time: "21:00", title: "極光追蹤 ✨", desc: "若 KP≥3，前往 Pyramid Lake 或 Athabasca 河灘追光！", links: [{ label: "📍 Pyramid Lake", url: "https://maps.app.goo.gl/p27Pn3wF2yrSnN4x7" }, { label: "📍 Athabasca Falls", url: "https://maps.app.goo.gl/CHJSyTB2tgdZtXjq9" }] }
+      ]},
+      { day: "10/4", title: "D11", drive: "3h", highlight: "⛰️ 洛磯山最高峰巨景 ＋ 🐟 震撼人心目睹鮭魚洄游瀑布！", weather: { icon: "⛅", text: "Valemount", temp: "5-13°C", note: "準備南下" }, events: [
+        { time: "09:00", title: "出發往 Jasper 🚙", desc: "開啟新的一天" },
+        { time: "09:45", title: "Pyramid Lake 🦆", desc: "木棧道散步與湖畔美景", mapUrl: "https://maps.app.goo.gl/kirensPeSd2fqovr5" },
+        { time: "10:30", title: "Jasper 鎮 BeaverTails 🍩", desc: "買國民甜點與楓糖漿", mapUrl: "https://maps.app.goo.gl/S5F9Kcrj2GgAhQEw6" },
+        { time: "11:30", title: "Jasper 鎮午餐 🍔", desc: "鎮上自行覓食\n🌧️ 雨備：Jasper-Yellowhead Museum（室內免費）", links: [{ label: "📍 雨備：博物館", url: "https://maps.app.goo.gl/TZdQKp2chdS69jFk9" }] },
+        { time: "13:00", title: "出發西行 🚙", desc: "沿 Hwy 16 西行，前往 Mt. Robson" },
+        { time: "14:10", title: "Mt. Robson 觀景台 ⛰️", desc: "洛磯山最高峰 (3,954m) 拍照停靠（有雲霧也壯觀！）", mapUrl: "https://maps.app.goo.gl/ozN6HboyW8HFEeBVA" },
+        { time: "14:40", title: "出發 🚙", desc: "前往 Rearguard Falls" },
+        { time: "14:55", title: "Rearguard Falls 🐟", desc: "Rearguard Falls Provincial Park 欣賞鮭魚洄游瀑布", mapUrl: "https://maps.app.goo.gl/5xxLeKCYMHyVV2xN8" },
+        { time: "15:15", title: "出發 🚙", desc: "前往 Valemount" },
+        { time: "15:45", title: "Valemount IGA 超市採買 🛒", desc: "抵達超市採買晚餐食材", mapUrl: "https://maps.app.goo.gl/oz6u1xp45YtHafpw5" },
+        { time: "16:30", title: "Super 8 Valemount 入住 🏨", desc: "Super 8 by Wyndham Valemount。狀態：已付款，押金50加幣", mapUrl: "https://maps.app.goo.gl/nbLNczZE6rB6Zsd67" },
+        { time: "18:30", title: "超市自理 🍽️", desc: "享用超市採買的晚餐" }
+      ]},
+      { day: "10/5", title: "D12", drive: "3h", highlight: "💦 驚險斷崖瀑布奇景 ＋ 買爆楓糖與煙燻鮭魚伴手禮 🍁", weather: { icon: "☁️", text: "Kamloops", temp: "10-16°C", note: "氣溫回暖" }, events: [
+        { time: "08:30", title: "出發往 Spahats Creek 🚙", desc: "一路南下" },
+        { time: "10:00", title: "Spahats Creek Falls 💦", desc: "壯觀斷崖瀑布", mapUrl: getMapUrl("Spahats Creek Falls") },
+        { time: "10:15", title: "Raft River 鮭魚洄游 🐟", desc: "Raft River Viewing Park 觀賞鮭魚", mapUrl: "https://maps.app.goo.gl/mkiVzvZCN6yJH9p58" },
+        { time: "15:00", title: "伴手禮採購 🍁", desc: "Kamloops 買楓糖跟煙燻鮭魚" },
+        { time: "16:30", title: "Super 8 by Wyndham Kamloops On The Hill 🏨", desc: "狀態：已付款，押金加幣100", mapUrl: "https://maps.app.goo.gl/DFfZnhHVfcnoTeXr8" }
+      ]},
+      { day: "10/6", title: "D13", drive: "3.5h", highlight: "🏙️ 重返大溫哥華都會區，舒適飯店整理行囊", weather: { icon: "⛅", text: "大溫哥華 Richmond", temp: "12-18°C", note: "回到都市" }, events: [
+        { time: "08:30", title: "出發 → Hope 🚙", desc: "沿 Hwy 1 西行" },
+        { time: "10:00", title: "抵達 Hope ☕", desc: "小鎮停靠休息" },
+        { time: "10:30", title: "出發 → Richmond 🚙", desc: "繼續前往溫哥華都會區" },
+        { time: "11:30", title: "抵達 Richmond 🌆", desc: "準備用午餐" },
+        { time: "12:00", title: "自行覓食午餐 🍔", desc: "市區尋找美食" },
+        { time: "13:30", title: "Grand Park Hotel Vancouver Airport 🏨", desc: "Ascend Hotel Collection。狀態：已付款，押金加幣250", mapUrl: "https://maps.app.goo.gl/GJDm3fdzqEnTcLM37" },
+        { time: "16:00", title: "整理行李 🧳", desc: "為明天的回程班機做準備" },
+        { time: "18:30", title: "自行覓食 🥡", desc: "晚餐自行處理" }
+      ]},
+      { day: "10/7", title: "D14", drive: "市區移動", highlight: "🦀 頂級粵菜大螃蟹海鮮饗宴，完美收尾啟程回台！", weather: { icon: "🌧️", text: "溫哥華 YVR", temp: "10-15°C", note: "準備搭機" }, events: [
+        { time: "10:00", title: "McArthurGlen Outlet 自由活動 🛍️", desc: "最後整理行李與採買", mapUrl: "https://maps.app.goo.gl/dmMS3bEf2buQhicF8" },
+        { time: "17:00", title: "YVR 機場還車 🚙", desc: "分兩地還車，請點擊下方專屬導航：", links: [{ label: "📍 阿庫/胖汁 還車", url: "https://maps.app.goo.gl/CQusKwwBzRbk32fk6" }, { label: "📍 小鳥 還車", url: getMapUrl("3880 GRANT MCCONACHIE WAY,RICHMOND,BC,V7B 1K2,CA") }] },
+        { time: "18:30", title: "海鮮大餐 🦀", desc: "頂級粵菜螃蟹完美收尾" },
+        { time: "21:00", title: "機場報到 ✈️", desc: "辦理國泰航空報到" },
+        { time: "深夜", title: "準備回台 ✈️", desc: "CX865/CX488 回程，班機為 10/8 凌晨 00:40 起飛！飛行 18h 10m" }
+      ]}
+    ];
+
+    // ✅ 修改1：自動跳到今日對應天數
+    function getTodayDay() {
+      const now = new Date();
+      const tripStart = new Date(2026, 8, 24); // 9/24
+      const tripEnd = new Date(2026, 9, 7);   // 10/7
+      if (now < tripStart) return itineraryData[0].day;
+      if (now > tripEnd) return itineraryData[itineraryData.length - 1].day;
+      const key = `${now.getMonth() + 1}/${now.getDate()}`;
+      return itineraryData.find(item => item.day === key)?.day || itineraryData[0].day;
+    }
+    let currentDay = getTodayDay();
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWz2ma6c5PMlofabcb0moPiWBVlUw2YTc",
+      authDomain: "canadago2026.firebaseapp.com",
+      projectId: "canadago2026",
+      storageBucket: "canadago2026.firebasestorage.app",
+      messagingSenderId: "545042928514",
+      appId: "1:545042928514:web:f684ee87cd0813c184359b"
+    };
+
+    let db, storage, addDoc, collection, serverTimestamp, ref, uploadBytes, getDownloadURL, onSnapshot, query, orderBy, doc, deleteDoc, deleteObject;
+
+    Promise.all([
+      import("https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"),
+      import("https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"),
+      import("https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js")
+    ]).then(([appModule, fsModule, storageModule]) => {
+      const app = appModule.initializeApp(firebaseConfig);
+      db = fsModule.getFirestore(app);
+      storage = storageModule.getStorage(app);
+
+      addDoc = fsModule.addDoc; collection = fsModule.collection; serverTimestamp = fsModule.serverTimestamp;
+      onSnapshot = fsModule.onSnapshot; query = fsModule.query; orderBy = fsModule.orderBy; doc = fsModule.doc; deleteDoc = fsModule.deleteDoc;
+      ref = storageModule.ref; uploadBytes = storageModule.uploadBytes; getDownloadURL = storageModule.getDownloadURL; deleteObject = storageModule.deleteObject;
+
+      document.getElementById('j-submit-btn').addEventListener('click', submitJournal);
+      loadJournals();
+    }).catch(err => console.error("Firebase 載入失敗:", err));
+
+    window.toggleJournalForm = function(show) {
+      if (show) { document.getElementById('journal-form-container').classList.remove('hidden'); document.getElementById('show-journal-form-btn').classList.add('hidden'); }
+      else { document.getElementById('journal-form-container').classList.add('hidden'); document.getElementById('show-journal-form-btn').classList.remove('hidden'); }
+    };
+
+    async function submitJournal() {
+      const btn = document.getElementById('j-submit-btn'); const status = document.getElementById('j-status');
+      const author = document.getElementById('j-author').value; const text = document.getElementById('j-text').value;
+      const fileInput = document.getElementById('j-image'); const file = fileInput.files[0];
+
+      if (!text && !file) { status.innerText = "⚠️ 至少寫點心情或上傳一張照片吧！"; status.style.color = "#e07a5f"; return; }
+      btn.disabled = true; btn.innerText = "上傳中... ⏳"; status.innerText = "正在將美景傳送到雲端..."; status.style.color = "#e59e35";
+
+      try {
+        let imageUrl = "";
+        if (file) { const fileRef = ref(storage, `journals/${Date.now()}_${file.name}`); const snapshot = await uploadBytes(fileRef, file); imageUrl = await getDownloadURL(snapshot.ref); }
+        await addDoc(collection(db, "journals"), { author: author, text: text, imageUrl: imageUrl, timestamp: serverTimestamp() });
+        status.innerText = "✅ 發布成功！"; status.style.color = "#8FC0A9"; document.getElementById('j-text').value = ''; fileInput.value = '';
+        setTimeout(() => { toggleJournalForm(false); status.innerText = ""; }, 1500);
+      } catch (error) { status.innerText = "❌ 發布失敗！"; status.style.color = "#e07a5f"; }
+      finally { btn.disabled = false; btn.innerText = "發布 🚀"; }
+    }
+
+    window.deleteJournal = async function(docId, imageUrl) {
+      if (!confirm("確定要刪除這篇日誌嗎？")) return;
+      try { await deleteDoc(doc(db, "journals", docId)); if (imageUrl) { const imgRef = ref(storage, imageUrl); await deleteObject(imgRef); } }
+      catch (error) { alert("❌ 刪除失敗，請再試一次。"); }
+    };
+
+    function loadJournals() {
+      const q = query(collection(db, "journals"), orderBy("timestamp", "desc"));
+      onSnapshot(q, (snapshot) => {
+        const feed = document.getElementById('journal-feed'); feed.innerHTML = '';
+        if (snapshot.empty) { feed.innerHTML = '<p style="text-align:center; color:#8a8174; margin-top:30px;">目前還沒有人寫日誌喔！趕快搶頭香！</p>'; return; }
+
+        const groupedPosts = {};
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data(); const docId = docSnap.id;
+          let dateStr = "即時動態"; let timeStr = "";
+          if (data.timestamp) { const date = data.timestamp.toDate(); dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; timeStr = `${date.getHours().toString().padStart(2,'0')}:${date.getMinutes().toString().padStart(2,'0')}`; }
+          if (!groupedPosts[dateStr]) groupedPosts[dateStr] = [];
+          groupedPosts[dateStr].push({ id: docId, data, timeStr });
+        });
+
+        const sortedDates = Object.keys(groupedPosts).sort((a, b) => b.localeCompare(a));
+        const nameMap = { "阿庫": "庫", "小鳥": "鳥", "胖汁": "胖", "芝麻": "芝", "小蘋果": "蘋", "均均": "均" };
+        const colors = ["#eaaa62", "#8FC0A9", "#7ab3d6", "#e07a5f", "#c89f9c", "#87a8a4"];
+
+        for (const date of sortedDates) {
+          feed.innerHTML += `<div class="journal-date-divider"><div class="journal-date-pill">${date}</div><div class="journal-date-line"></div></div>`;
+          groupedPosts[date].forEach(post => {
+            const data = post.data; const docId = post.id;
+            let imgHtml = data.imageUrl ? `<img src="${data.imageUrl}" class="j-img" loading="lazy">` : '';
+            const initial = data.author ? (nameMap[data.author] || data.author.charAt(0)) : "匿";
+            let hash = 0; if (data.author) { for (let i = 0; i < data.author.length; i++) hash += data.author.charCodeAt(i); }
+            const avatarBg = colors[hash % colors.length];
+
+            feed.innerHTML += `
+              <div class="journal-post" id="post-${docId}">
+                <div class="j-header">
+                  <div class="j-author-info"><div class="j-avatar" style="background-color: ${avatarBg};">${initial}</div><span class="j-author">${data.author}</span><span style="font-size: 11px; color: #c4bcae; margin-left: 4px;">${post.timeStr}</span></div>
+                  <button class="delete-btn" onclick="deleteJournal('${docId}', '${data.imageUrl || ''}')" title="刪除">🗑️</button>
+                </div>
+                <div class="j-text">${data.text}</div>${imgHtml}
+              </div>`;
+          });
+        }
+      });
+    }
+
+    // 🌟 更新版時間標籤顏色，並移除「今日亮點：」的文字前綴
+    function renderApp() {
+      document.getElementById('tabs-container').innerHTML = itineraryData.map(data => `<div class="tab ${data.day === currentDay ? 'active' : ''}" onclick="changeDay('${data.day}')"><span class="day-text">${data.title}</span><span class="day-num">${data.day.split('/')[1]}</span></div>`).join('');
+      const todayData = itineraryData.find(d => d.day === currentDay);
+      if (todayData && todayData.weather) {
+        document.getElementById('weather-container').innerHTML = `
+          <div class="weather-card">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="weather-icon">${todayData.weather.icon}</div>
+              <div>
+                <div><strong>${todayData.weather.text}</strong>｜${todayData.weather.temp}</div>
+                <div style="font-size: 11px; margin-top: 2px; color: #8a8174;">🚗 車程預估: ${todayData.drive} ｜ 💡 ${todayData.weather.note}</div>
+              </div>
+            </div>
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #d5cda3; font-size: 13px; color: #3b8a7c; font-weight: bold;">
+              🎯 ${todayData.highlight || '探索精彩加拿大！'}
+            </div>
+          </div>`;
+      }
+      if (todayData && todayData.events.length > 0) {
+        document.getElementById('schedule-container').innerHTML = todayData.events.map(event => {
+          let badgeClass = '';
+          if (event.title.includes('入住') || event.title.includes('飯店') || event.title.includes('別墅')) {
+            badgeClass = 'bg-green';
+          } else if (event.title.includes('極光') || event.title.includes('追光') || event.time.includes('22:') || event.time.includes('23:') || event.time.includes('01:') || event.time.includes('深夜')) {
+            badgeClass = 'bg-blue';
+          } else if (event.title.includes('起飛') || event.title.includes('抵達') || event.title.includes('還車') || event.title.includes('回台')) {
+            badgeClass = 'bg-red';
+          }
+
+          let mapButtons = '';
+          if (event.mapUrl) mapButtons = `<a href="${event.mapUrl}" target="_blank" class="map-link">📍 導航</a>`;
+          if (event.links && event.links.length > 0) mapButtons = event.links.map(link => `<a href="${link.url}" target="_blank" class="map-link block">${link.label}</a>`).join('');
+
+          return `<div class="schedule-card"><div class="time-badge ${badgeClass}">${event.time}</div><div class="info"><h3>${event.title}</h3><p style="white-space:pre-wrap;">${event.desc}</p>${mapButtons}</div></div>`;
+        }).join('');
+      }
+    }
+
+    // ✅ 修改2：changeDay 加入 active tab 自動捲動
+    window.changeDay = function(day) {
+      currentDay = day;
+      renderApp();
+      requestAnimationFrame(() => {
+        const activeTab = document.querySelector('#tabs-container .tab.active');
+        if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+    }
+    window.switchMainTab = function(tabName, element) { document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active')); element.classList.add('active'); document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden')); document.getElementById(`${tabName}-view`).classList.remove('hidden'); }
+    window.switchSubTab = function(module, type, element) { element.parentElement.querySelectorAll('.sub-btn').forEach(el => el.classList.remove('active')); element.classList.add('active'); document.getElementById(`${module}-add-view`)?.classList.add('hidden'); document.getElementById(`${module}-list-view`)?.classList.add('hidden'); document.getElementById(`${module}-links-view`)?.classList.add('hidden'); document.getElementById(`${module}-notes-view`)?.classList.add('hidden'); document.getElementById(`${module}-${type}-view`).classList.remove('hidden'); if(type === 'list') loadExpenses(); }
+
+    const GOOGLE_APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5h1Vyk1HFuUxD0XhpqPf1JV_52Bx-FJfLq5bfjcEapVCy7yaaPokdNBbsS65CEGfz/exec';
+
+    // ✅ 修改3：submitExpense 改為 async，加入日期與收據照片上傳
+    window.submitExpense = async function() {
+      const statusEl = document.getElementById('expense-status');
+      const receiptFile = document.getElementById('ex-receipt').files[0];
+      const payload = {
+        currency: document.getElementById('ex-currency').value,
+        amount: document.getElementById('ex-amount').value,
+        item: document.getElementById('ex-item').value,
+        location: document.getElementById('ex-location').value,
+        payer: document.getElementById('ex-payer').value,
+        method: document.getElementById('ex-method').value,
+        status: document.getElementById('ex-status').value,
+        splitFor: Array.from(document.querySelectorAll('.ex-split:checked')).map(cb => cb.value).join(', '),
+        date: document.getElementById('ex-date').value
+      };
+      if (!payload.item || !payload.amount || !payload.splitFor) { statusEl.innerText = "⚠️ 請填寫完整項目"; return; }
+      statusEl.innerText = "⏳ 寫入試算表中...";
+      if (receiptFile && storage && ref && uploadBytes && getDownloadURL) {
+        try {
+          statusEl.innerText = "⏳ 上傳收據照片中...";
+          const fileRef = ref(storage, `receipts/${Date.now()}_${receiptFile.name}`);
+          const snapshot = await uploadBytes(fileRef, receiptFile);
+          payload.receiptUrl = await getDownloadURL(snapshot.ref);
+          statusEl.innerText = "⏳ 寫入試算表中...";
+        } catch (e) { statusEl.innerText = "⚠️ 照片上傳失敗，仍繼續記帳..."; }
+      }
+      try {
+        await fetch(GOOGLE_APP_SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
+        statusEl.innerText = "✅ 記帳成功！";
+        document.getElementById('ex-amount').value = '';
+        document.getElementById('ex-item').value = '';
+        document.getElementById('ex-location').value = '';
+        document.getElementById('ex-receipt').value = '';
+      } catch (e) { statusEl.innerText = "❌ 傳送失敗"; }
+    }
+
+    let expenseData = [];
+    let currentFilter = '全體';
+    function loadExpenses() {
+      document.getElementById('expense-summary-container').innerHTML = '<p style="text-align:center; margin-top:30px;">⏳ 連線至 Google 讀取資料中...</p>';
+      document.getElementById('expense-daily-list').innerHTML = '';
+      fetch(GOOGLE_APP_SCRIPT_URL).then(res => res.json()).then(data => { expenseData = data.filter(d => d.amount && d.amount.trim() !== ''); renderExpenses(); }).catch(err => { document.getElementById('expense-summary-container').innerHTML = '❌ 讀取失敗'; });
+    }
+
+    window.filterExpenses = function(person, element) { currentFilter = person; document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active')); element.classList.add('active'); renderExpenses(); }
+
+    function renderExpenses() {
+      let totalCAD = 0; let totalTWD = 0; let dailyGroup = {};
+      expenseData.forEach(d => {
+        let fullAmount = parseFloat(d.amount) || 0; let currency = d.currency; let payer = d.payer; let itemText = d.item; let locationText = d.location ? `📍 ${d.location}` : ''; let timestamp = d.timestamp; let status = d.status;
+        let splitArray = d.splitFor ? d.splitFor.split(',').map(s => s.trim()).filter(s => s !== '') : []; if(splitArray.length === 0) splitArray = [payer];
+        // ✅ 修改4：優先使用手動輸入的 date 欄位，fallback 到 timestamp
+        let peopleCount = splitArray.length; let splitAmount = fullAmount / peopleCount; let dateStr = d.date || (timestamp ? timestamp.split(' ')[0] : '未知日期');
+
+        if (currentFilter === '全體') {
+          if (currency === 'CAD') totalCAD += fullAmount; if (currency === 'TWD') totalTWD += fullAmount;
+          if (!dailyGroup[dateStr]) dailyGroup[dateStr] = { items: [], subCAD: 0, subTWD: 0 };
+          if (currency === 'CAD') dailyGroup[dateStr].subCAD += fullAmount; if (currency === 'TWD') dailyGroup[dateStr].subTWD += fullAmount;
+          dailyGroup[dateStr].items.push({ title: itemText, displayAmount: `${currency} $${fullAmount}`, subtitle: locationText, tag: `💳 ${payer} 付款 (${status}) ➔ 分攤: ${d.splitFor}`, receiptUrl: d.receiptUrl || '' });
+        } else {
+          if (splitArray.includes(currentFilter)) {
+            if (currency === 'CAD') totalCAD += splitAmount; if (currency === 'TWD') totalTWD += splitAmount;
+            if (!dailyGroup[dateStr]) dailyGroup[dateStr] = { items: [], subCAD: 0, subTWD: 0 };
+            if (currency === 'CAD') dailyGroup[dateStr].subCAD += splitAmount; if (currency === 'TWD') dailyGroup[dateStr].subTWD += splitAmount;
+            let note = payer === currentFilter ? (peopleCount > 1 ? ` (原價 $${fullAmount}，由 ${peopleCount} 人平分)` : '') : ` (由 ${payer} 代墊拆帳)`;
+            dailyGroup[dateStr].items.push({ title: itemText, displayAmount: `${currency} $${Math.round(splitAmount * 100) / 100}`, subtitle: `${locationText}${note}`, tag: `狀態：${status}`, receiptUrl: d.receiptUrl || '' });
+          }
+        }
+      });
+
+      let grandTotalTWD = Math.round((totalCAD * EX_RATE) + totalTWD);
+      let summaryTitleText = currentFilter === '全體' ? '全體 團體總花費 (約合台幣)' : `${currentFilter} 應分攤之個人支出 (約合台幣)`;
+      // ✅ 修改5：總覽顯示匯率
+      document.getElementById('expense-summary-container').innerHTML = `<div class="summary-box"><div class="summary-title">${summaryTitleText}</div><div class="summary-total">NT$ ${grandTotalTWD.toLocaleString()}</div><div class="summary-detail">CAD $${Math.round(totalCAD*100)/100} / TWD $${Math.round(totalTWD)}（匯率 1 CAD = ${EX_RATE} TWD）</div></div>`;
+
+      let listHTML = '';
+      Object.keys(dailyGroup).sort().reverse().forEach(date => {
+        let dayTotalTWD = Math.round((dailyGroup[date].subCAD * EX_RATE) + dailyGroup[date].subTWD);
+        listHTML += `<div class="daily-group"><div class="daily-header"><span>📅 ${date}</span><span>應付約 NT$ ${dayTotalTWD.toLocaleString()}</span></div>`;
+        dailyGroup[date].items.slice().reverse().forEach(item => {
+          let icon = item.displayAmount.includes('CAD') ? '🍁' : '🇹🇼';
+          // ✅ 修改6：有收據照片則顯示縮圖
+          let receiptHtml = item.receiptUrl ? `<a href="${item.receiptUrl}" target="_blank"><img src="${item.receiptUrl}" style="max-height:60px; border-radius:6px; border:1px solid #f0ead2; margin-top:6px; display:block;"></a>` : '';
+          listHTML += `<div class="expense-item"><div class="ex-item-main"><span>${icon} ${item.title}</span><span>${item.displayAmount}</span></div><div class="ex-item-sub"><span>${item.subtitle}</span><span>${item.tag}</span></div>${receiptHtml}</div>`;
+        });
+        listHTML += `</div>`;
+      });
+      document.getElementById('expense-daily-list').innerHTML = listHTML || '<p style="text-align:center; color:#8a8174; margin-top:20px;">尚無相關記帳紀錄</p>';
+    }
+
+    window.handleStatusChange = function() {
+      const status = document.getElementById('ex-status').value;
+      const payer = document.getElementById('ex-payer').value;
+      if (status === '個人') {
+        document.querySelectorAll('.ex-split').forEach(cb => { cb.checked = (cb.value === payer); });
+      } else {
+        document.querySelectorAll('.ex-split').forEach(cb => { cb.checked = true; });
+      }
+    }
+
+    window.handlePayerChange = function() {
+      const status = document.getElementById('ex-status').value;
+      const payer = document.getElementById('ex-payer').value;
+      if (status === '個人') {
+        document.querySelectorAll('.ex-split').forEach(cb => { cb.checked = (cb.value === payer); });
+      }
+    }
+
+    renderApp();
+
+    // ✅ 修改7：攻略清單 localStorage 持久化（重整不遺失勾選）
+    document.querySelectorAll('.check-item input[type="checkbox"]').forEach((cb, i) => {
+      const key = `checklist_${i}`;
+      cb.checked = localStorage.getItem(key) === 'true';
+      cb.addEventListener('change', () => localStorage.setItem(key, cb.checked));
+    });
+
+    // ✅ 記帳日期預設今日
+    document.getElementById('ex-date').value = new Date().toISOString().split('T')[0];
+
+    // ✅ 修改8：初始載入時也讓 active tab 捲動到可見位置
+    requestAnimationFrame(() => {
+      const activeTab = document.querySelector('#tabs-container .tab.active');
+      if (activeTab) activeTab.scrollIntoView({ behavior: 'instant', inline: 'center', block: 'nearest' });
+    });
+  </script>
+
+</body></html>
